@@ -22,14 +22,12 @@
             <version>1.4</version>
         </dependency>
 
-<<<<<<< HEAD
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>13.0</version>
         </dependency>
-=======
->>>>>>> origin/master
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
