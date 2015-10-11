@@ -1,0 +1,11 @@
+{
+  "gmap_time_key": "your key goes here",
+  "interval": 10,
+  "origin": {
+    "address": "address 1"
+  },
+  "destination": {
+    "address": "address 2"
+  },
+  "transport": "Driving"
+}
