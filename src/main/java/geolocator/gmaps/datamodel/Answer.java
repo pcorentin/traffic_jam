@@ -4,6 +4,16 @@ package geolocator.gmaps.datamodel;
  * Created by pcorentin on 11/10/2015.
  */
 public class Answer {
+
+    public static final String OK = "OK";
+    public static final String INVALID_REQUEST = "INVALID_REQUEST";
+    public static final String MAX_ELEMENTS_EXCEEDED = "MAX_ELEMENTS_EXCEEDED";
+    public static final String OVER_QUERY_LIMIT = "OVER_QUERY_LIMIT";
+    public static final String REQUEST_DENIED = "REQUEST_DENIED";
+    public static final String UNKNOWN_ERROR = "UNKNOWN_ERROR";
+
+
+
     private String status;
     private String[] origin_addresses;
     private String[] destination_addresses;

@@ -6,6 +6,7 @@ import com.google.gson.stream.JsonReader;
 import geolocator.IGeoDataAccess;
 import geolocator.IGeoLocation;
 import geolocator.gmaps.datamodel.Answer;
+import geolocator.gmaps.datamodel.Element;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.http.HttpEntity;
@@ -19,7 +20,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
+
+import static geolocator.gmaps.datamodel.Answer.OK;
 
 /**
  * Created by pcorentin on 11/10/2015.
@@ -38,11 +40,12 @@ public class GmapDataAccess implements IGeoDataAccess {
 
 
     @NotNull
-    public Date getTravelTime(@NotNull IGeoLocation origin, @NotNull IGeoLocation destination, @NotNull String transport) {
+    public long getTravelTime(@NotNull IGeoLocation origin, @NotNull IGeoLocation destination, @NotNull String transport) {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(buildQuery(origin, destination, transport));
         CloseableHttpResponse response = null;
+        Answer answer = null;
         try {
             response = httpclient.execute(httpGet);
             System.out.println(response.getStatusLine());
@@ -51,9 +54,9 @@ public class GmapDataAccess implements IGeoDataAccess {
             InputStream in = entity.getContent();
             JsonReader reader = new JsonReader(new InputStreamReader(in));
             Gson gson = new Gson();
-            Answer anwser = gson.fromJson(reader, Answer.class);
+            answer = gson.fromJson(reader, Answer.class);
             Gson builder = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println(builder.toJson(anwser));
+            System.out.println(builder.toJson(answer));
             EntityUtils.consume(entity);
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,8 +67,19 @@ public class GmapDataAccess implements IGeoDataAccess {
                 e.printStackTrace();
             }
         }
-        return new Date();
-
+        if (answer == null) return -1;
+        switch (answer.getStatus()) {
+            case OK:
+                Element element = answer.getRows()[0].getElements()[0];
+                switch (element.getStatus()) {
+                    case Element.ELEMENT_OK:
+                        return element.getDuration().getValue();
+                    default:
+                        return -1;
+                }
+            default:
+                return -1;
+        }
 
     }
 

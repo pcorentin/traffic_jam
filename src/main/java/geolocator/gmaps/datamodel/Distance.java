@@ -4,14 +4,14 @@ package geolocator.gmaps.datamodel;
  * Created by pcorentin on 11/10/2015.
  */
 public class Distance {
-    private int value;
+    private long value;
     private String text;
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(long value) {
         this.value = value;
     }
 

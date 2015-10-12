@@ -8,10 +8,37 @@ import geolocator.gmaps.GmapLocation;
 public class Configuration {
 
     private String gmap_time_key;
+    private String cluster;
+    private String label;
+    private String publishAddress;
     private GmapLocation origin;
     private GmapLocation destination;
     private int interval;
     private String transport;
+
+    public String getPublishAddress() {
+        return publishAddress;
+    }
+
+    public void setPublishAddress(String publishAddress) {
+        this.publishAddress = publishAddress;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(String cluster) {
+        this.cluster = cluster;
+    }
 
     public String getGmap_time_key() {
         return gmap_time_key;

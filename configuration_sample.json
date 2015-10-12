@@ -1,5 +1,8 @@
 {
   "gmap_time_key": "your key goes here",
+  "cluster": "traffic_jam",
+  "publishAddress": "127.0.0.1",
+  "publishPort": 9300,
   "interval": 10,
   "origin": {
     "address": "address 1"
